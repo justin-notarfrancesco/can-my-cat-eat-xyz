@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         const response = await openai.responses.create({
             model: "gpt-5.4-mini",
             input: `In general, can cats eat ${word}? Start your response with either "Yes." or "No.". Then, in 2-3 complete sentences, give a reason for why cats can or cannot eat ${word}. If you don't have an answer or the question doesn't make sense, then just return "Oof. Sorry! Please try a different food.".`,
-            reasoning: { effort: "minimal" },
+            reasoning: { effort: "none" },
             text: { verbosity: "low" },
             max_output_tokens: 400,
         });
@@ -31,6 +31,12 @@ export default async function handler(req, res) {
         return res.status(200).json({ answer: response.output_text });
     } catch (err) {
         console.error(err);
-        return res.status(500).json({ error: "Failed to get a response" });
+        return res.status(500).json({
+            error: "Failed to get a response",
+            detail: err?.message,
+            status: err?.status,
+            code: err?.code,
+            type: err?.type,
+        });
     }
 }
