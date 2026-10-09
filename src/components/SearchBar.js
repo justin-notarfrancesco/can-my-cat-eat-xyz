@@ -3,9 +3,20 @@ import { pages } from "../assets/content";
 import { Combobox } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/outline";
 
+function shuffle(items) {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 export default function SearchBar() {
   const [query, setQuery] = useState("");
-  const filteredPages = pages.filter((page) =>
+  // shuffle once per mount so unrelated re-renders don't reorder the list
+  const [shuffledPages] = useState(() => shuffle(pages));
+  const filteredPages = shuffledPages.filter((page) =>
     page.toLowerCase().startsWith(query.toLowerCase())
   );
 
@@ -32,7 +43,7 @@ export default function SearchBar() {
         </div>
         {filteredPages.length > 0 && (
           <Combobox.Options static className="comboboxMaxHeight overflow-y-auto pt-1">
-            {filteredPages.sort(() => 0.5 - Math.random()).map((page) => (
+            {filteredPages.map((page) => (
               <Combobox.Option key={page} value={page} className="mr-3">
                 {({ active }) => (
                   <a className="text-purple-900 visited:text-purple-900 hover:text-purple-900" href={page}>
