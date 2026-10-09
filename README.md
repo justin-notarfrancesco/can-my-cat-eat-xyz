@@ -1,2 +1,2 @@
-Cat nutrition search engine, powered by OpenAI's gpt-3.5-turbo model
+Cat nutrition search engine, powered by Google's Gemini Flash-Lite, with answers cached in Firebase
 # can-my-cat-eat-xyz

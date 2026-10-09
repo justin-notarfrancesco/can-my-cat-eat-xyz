@@ -1,4 +1,4 @@
-// Calls our own serverless function (/api/ask) instead of OpenAI directly,
+// Calls our own serverless function (/api/ask) instead of Gemini directly,
 // so the API key stays on the server and is never exposed in the browser.
 export default async function request(word) {
     const response = await fetch("/api/ask", {
