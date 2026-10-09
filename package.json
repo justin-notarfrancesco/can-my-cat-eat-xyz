@@ -28,6 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "review-answers": "node scripts/review-answers.mjs",
     "prettier": "prettier --write '**/*.{ts,js,css,html}'"
   },
   "browserslist": {

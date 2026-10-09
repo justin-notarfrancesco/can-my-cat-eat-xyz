@@ -2,6 +2,7 @@
   --red: #ef476f;
   --green: #06d6a0;
   --yellow: #ffd166;
+  --orange: #f78c6b;
 }
 
 .yup {
@@ -10,6 +11,10 @@
 
 .nope {
   color: var(--red);
+}
+
+.maybe {
+  color: var(--orange);
 }
 
 .oof {

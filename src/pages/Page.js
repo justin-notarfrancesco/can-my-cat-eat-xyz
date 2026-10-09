@@ -15,17 +15,18 @@ export default function Page() {
   const [attempt, setAttempt] = useState(0)
   const food = useParams().id;
 
+  // The server always starts an answer with "Yes.", "No.", "It depends.", or
+  // "Oof." (when it has no answer).
   function formatText(input) {
-    let answer = ''
-    if (input.charAt(0) === 'Y') {
-      answer = 'yup'
+    const verdicts = [
+      [/^yes\.\s*/i, 'yup'],
+      [/^no\.\s*/i, 'nope'],
+      [/^it depends\.\s*/i, 'maybe'],
+    ]
+    for (const [pattern, answer] of verdicts) {
+      if (pattern.test(input)) return { answer: answer, input: input.replace(pattern, '') }
     }
-    else if (input.charAt(0) === 'O') {
-      answer = 'oof'
-    }
-    else answer = 'nope'
-    input = input.substring(4)
-    return { answer: answer, input: input }
+    return { answer: 'oof', input: input.replace(/^oof\.\s*/i, '') }
   }
 
   useEffect(() => {
