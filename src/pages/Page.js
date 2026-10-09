@@ -11,6 +11,8 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const [answer, setAnswer] = useState(null)
   const [reason, setReason] = useState(null)
+  const [error, setError] = useState(false)
+  const [attempt, setAttempt] = useState(0)
   const food = useParams().id;
 
   function formatText(input) {
@@ -27,15 +29,25 @@ export default function Page() {
   }
 
   useEffect(() => {
-    const data = request(food)
-    data.then(
-      result => {
-        setIsLoading(false);
+    let cancelled = false
+    setIsLoading(true)
+    setError(false)
+    request(food)
+      .then(result => {
+        if (cancelled) return
         setAnswer(formatText(result).answer)
         setReason(formatText(result).input)
-      }
-    )
-  }, [food]);
+      })
+      .catch(err => {
+        if (cancelled) return
+        console.error(err)
+        setError(true)
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoading(false)
+      })
+    return () => { cancelled = true }
+  }, [food, attempt]);
 
   return (
     <div className="isolate text-center min-h-screen overflow-y-hidden bg-purple-100">
@@ -58,8 +70,21 @@ export default function Page() {
               <a class="bg-purple-200 hover:bg-purple-300 font-bold text-xl text-purple-500 transition-all py-2.5 px-5 rounded items-center" href="/">cancel</a>
             </div>
           }
-          {!isLoading && <div className={`font-bold text-5xl pt-12 ${answer}`}>{answer}</div>}
-          {!isLoading &&
+          {!isLoading && error &&
+            <div className="pt-12">
+              <div className="text-7xl">🙀</div>
+              <div className="font-bold text-5xl text-purple-900 pt-6">uh oh!</div>
+              <div className="text-xl text-purple-900 pt-6 pb-10">
+                our cat got distracted chasing a laser pointer and lost track of your question. give it another try?
+              </div>
+              <div className="flex flex-wrap justify-center gap-4">
+                <button className="bg-purple-500 hover:bg-purple-600 font-bold text-xl text-white transition-all py-2.5 px-5 rounded" onClick={() => setAttempt(a => a + 1)}>try again</button>
+                <a className="bg-purple-200 hover:bg-purple-300 font-bold text-xl text-purple-500 transition-all py-2.5 px-5 rounded" href="/">pick another food</a>
+              </div>
+            </div>
+          }
+          {!isLoading && !error && <div className={`font-bold text-5xl pt-12 ${answer}`}>{answer}</div>}
+          {!isLoading && !error &&
             <>
               <div className="text-xl text-purple-900 pt-12 pb-6">{reason}</div>
               <p className="text-sm text-purple-900/80 pb-10">
