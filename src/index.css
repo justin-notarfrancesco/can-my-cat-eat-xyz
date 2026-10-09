@@ -134,7 +134,8 @@ input:-webkit-autofill:focus {
 }
 
 .comboboxMaxHeight {
-  max-height: 20.55rem;
+  /* --combobox-available is measured in SearchBar so the list stops above the fixed footer */
+  max-height: min(20.55rem, var(--combobox-available, 20.55rem));
 }
 
 :invalid {
