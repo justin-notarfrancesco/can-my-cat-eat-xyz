@@ -6,7 +6,7 @@ import BottomBlur from "../components/BottomBlur";
 
 export default function Home() {
   return (
-    <div className="isolate min-h-screen overflow-y-hidden bg-purple-100">
+    <div className="isolate min-h-screen overflow-hidden bg-purple-100">
       <NavBar />
       <main>
         <div className="relative mx-auto max-w-3xl pt-[12.5vh]">

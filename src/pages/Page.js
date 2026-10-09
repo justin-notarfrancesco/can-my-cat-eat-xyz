@@ -50,7 +50,7 @@ export default function Page() {
   }, [food, attempt]);
 
   return (
-    <div className="isolate text-center min-h-screen overflow-y-hidden bg-purple-100">
+    <div className="isolate text-center min-h-screen overflow-hidden bg-purple-100">
       <NavBar />
       <main>
         <div className="relative mx-auto max-w-3xl px-4 pb-24 pt-[6.25vh] sm:pt-[12.5vh]">

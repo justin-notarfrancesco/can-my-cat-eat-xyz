@@ -42,6 +42,92 @@ input:-webkit-autofill:focus {
   }
 }
 
+/* Animated background blobs (see AnimatedBlob.js) */
+.blob-layer {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.blob-layer-a {
+  animation: blob-drift-a 8s ease-in-out infinite alternate;
+}
+
+.blob-layer-b {
+  animation: blob-drift-b 11s ease-in-out infinite alternate;
+}
+
+@keyframes blob-drift-a {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(15%, -18%) rotate(20deg) scale(1.2);
+  }
+  66% {
+    transform: translate(-14%, 14%) rotate(-16deg) scale(0.85);
+  }
+  100% {
+    transform: translate(10%, 10%) rotate(12deg) scale(1.12);
+  }
+}
+
+@keyframes blob-drift-b {
+  0% {
+    transform: translate(-16%, 10%) rotate(-28deg) scale(0.8);
+  }
+  50% {
+    transform: translate(18%, -14%) rotate(24deg) scale(1.25);
+  }
+  100% {
+    transform: translate(-6%, -12%) rotate(-10deg) scale(1.05);
+  }
+}
+
+.blob-stop-a1 {
+  animation: blob-color-a1 6s ease-in-out infinite alternate;
+}
+.blob-stop-a2 {
+  animation: blob-color-a2 6s ease-in-out infinite alternate;
+}
+.blob-stop-b1 {
+  animation: blob-color-b1 9s ease-in-out infinite alternate;
+}
+.blob-stop-b2 {
+  animation: blob-color-b2 9s ease-in-out infinite alternate;
+}
+
+@keyframes blob-color-a1 {
+  0% { stop-color: #9089fc; }
+  50% { stop-color: #6366f1; }
+  100% { stop-color: #c084fc; }
+}
+@keyframes blob-color-a2 {
+  0% { stop-color: #ff80b5; }
+  50% { stop-color: #f472b6; }
+  100% { stop-color: #a78bfa; }
+}
+@keyframes blob-color-b1 {
+  0% { stop-color: #ff80b5; }
+  50% { stop-color: #c084fc; }
+  100% { stop-color: #818cf8; }
+}
+@keyframes blob-color-b2 {
+  0% { stop-color: #7dd3fc; }
+  50% { stop-color: #9089fc; }
+  100% { stop-color: #f0abfc; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob-layer,
+  .blob-stop-a1,
+  .blob-stop-a2,
+  .blob-stop-b1,
+  .blob-stop-b2 {
+    animation: none;
+  }
+}
+
 .comboboxMaxHeight {
   max-height: 20.55rem;
 }

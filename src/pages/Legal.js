@@ -23,7 +23,7 @@ export default function Legal() {
   }, []);
 
   return (
-    <div className="relative isolate min-h-screen overflow-y-auto bg-purple-100">
+    <div className="relative isolate min-h-screen overflow-x-hidden overflow-y-auto bg-purple-100">
       <NavBar />
       <main>
         <div className="relative mx-auto max-w-3xl px-6 pb-24 text-purple-900">
