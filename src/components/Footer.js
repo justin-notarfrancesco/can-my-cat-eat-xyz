@@ -1,6 +1,6 @@
 export default function Footer({ onCookieSettings }) {
   return (
-    <footer className="fixed inset-x-0 bottom-0 z-10 bg-purple-100/80 px-4 py-2 text-center text-xs text-purple-900 backdrop-blur">
+    <footer className="fixed inset-x-0 bottom-0 z-10 bg-purple-100/80 px-4 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-center text-xs text-purple-900 backdrop-blur">
       © {new Date().getFullYear()} canmycateat.xyz · ai answers, not vet advice ·{" "}
       <a href="/legal#terms" className="underline hover:text-purple-500">
         terms

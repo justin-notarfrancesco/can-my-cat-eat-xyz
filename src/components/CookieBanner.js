@@ -3,7 +3,7 @@ export default function CookieBanner({ onChoice }) {
     <div
       role="dialog"
       aria-label="cookie consent"
-      className="fixed inset-x-0 bottom-0 z-20 p-4"
+      className="fixed inset-x-0 bottom-0 z-20 p-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
     >
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 rounded-xl bg-white p-4 text-purple-900 shadow-2xl ring-1 ring-black/5 sm:flex-row">
         <p className="text-sm">
