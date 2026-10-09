@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", () => {
+test("shows the legal links and cookie banner", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByText("terms")).toBeInTheDocument();
+  expect(screen.getByText("privacy")).toBeInTheDocument();
+  expect(screen.getByRole("dialog", { name: "cookie consent" })).toBeInTheDocument();
 });

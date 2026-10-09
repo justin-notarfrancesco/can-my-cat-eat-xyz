@@ -41,7 +41,7 @@ export default function Page() {
     <div className="isolate text-center min-h-screen overflow-y-hidden bg-purple-100">
       <NavBar />
       <main>
-        <div className="relative mx-auto max-w-3xl px-4 pt-[6.25vh] sm:pt-[12.5vh]">
+        <div className="relative mx-auto max-w-3xl px-4 pb-24 pt-[6.25vh] sm:pt-[12.5vh]">
           <TopBlur />
           <h1 className="text-5xl font-bold text-purple-900">
             can my 🐈 eat{" "}
@@ -61,7 +61,13 @@ export default function Page() {
           {!isLoading && <div className={`font-bold text-5xl pt-12 ${answer}`}>{answer}</div>}
           {!isLoading &&
             <>
-              <div className="text-xl text-purple-900 py-12 mb-2">{reason}</div>
+              <div className="text-xl text-purple-900 pt-12 pb-6">{reason}</div>
+              <p className="text-sm text-purple-900/80 pb-10">
+                ai-generated, may be wrong. not veterinary advice. if your cat
+                ate something worrying, call your vet or ASPCA Poison Control at{" "}
+                <a href="tel:+18884264435" className="underline">(888) 426-4435</a>.{" "}
+                <a href="/legal" className="underline">more</a>
+              </p>
               <a class="bg-purple-200 hover:bg-purple-300 font-bold text-xl text-purple-500 transition-all py-2.5 px-5 rounded items-center" href="/">have another food in mind?</a>
             </>
           }

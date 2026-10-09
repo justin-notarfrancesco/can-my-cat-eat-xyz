@@ -4,7 +4,6 @@ import { Dialog } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 
 const navigation = [
-  { name: "about us", href: "/about" },
   { name: "legal stuff", href: "/legal" },
 ];
 
