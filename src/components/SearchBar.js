@@ -33,8 +33,19 @@ function useAvailableListHeight() {
       setAvailable(Math.max(MIN_LIST_HEIGHT_PX, Math.floor(space)));
     };
     measure();
+    // the first measure can run before layout and the viewport height settle
+    // (late styles, mobile toolbars), so re-measure whenever either changes
+    const observer = new ResizeObserver(measure);
+    observer.observe(document.body);
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.visualViewport?.addEventListener("resize", measure);
+    window.addEventListener("load", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+      window.visualViewport?.removeEventListener("resize", measure);
+      window.removeEventListener("load", measure);
+    };
   }, [list]);
 
   const ref = useCallback((node) => setList(node), []);
